@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # Private
 _did_backup=
@@ -115,8 +114,8 @@ parse_args() {
           no_introduction=1
           skip_intro=1
           ;;
-      --with-system)
-          skip_system=0
+      --skip-dependencies)
+          skip_dependencies=1
           ;;
       --)
           shift
@@ -235,7 +234,6 @@ apt_install_rails() {
 installAll() {
   apt_intall_git
   apt_update_upgrade
-  apt_install_dev_dependencies
   apt_install_rbenv
   apt_install_ruby_build
   apt_install_ruby
@@ -246,13 +244,13 @@ installAll() {
 
 # Let's go!
 skip_intro=0
-skip_system=1
+skip_dependencies=0
 
 parse_args "$@"
 
 [[ $skip_intro -eq 0 ]] && show_intro
-[[ $skip_system -eq 0 ]] && installAll
-
+[[ $skip_dependencies -eq 0 ]] && apt_install_dev_dependencies
+installAll
 
 report_header "Checking git configuration..."
 set +e
