@@ -216,7 +216,12 @@ apt_install_zsh() {
      zsh --version
      whereis zsh
      sudo usermod -s /usr/bin/zsh $(whoami)
-     sudo reboot
+  fi
+}
+
+apt_install_oh_my_zsh() {
+  if [ ! -s /home/jcottobboni/.oh-my-zsh ]; then
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   fi
 }
 
@@ -228,16 +233,19 @@ apt_install_powerline_fonts_theme() {
   fi
 }
 
+apt_install_syntax_gighlighting_on_zsh() {
+  if [ ! -s /usr/share/zsh-syntax-highlighting ]; then
+    sudo apt-get install zsh-syntax-highlighting -y
+    echo "source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+  fi
+}
+
 apt_install_rbenv() {
   if ! [ -x "$(command -v rbenv)" ]; then
     echo "Installing Rbenv..."
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-    exec $SHELL
-
-    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+    echo 'eval "$(rbenv init -)"' >>  ~/.zshrc
     exec $SHELL
   fi
 }
@@ -246,7 +254,7 @@ apt_install_ruby_build() {
   if [ ! -s ${HOME}/.rbenv/plugins/ruby-build ]; then
     echo "Installing Ruby build..."
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >>  ~/.zshrc
     exec $SHELL
   fi
 }
@@ -285,14 +293,15 @@ installAll() {
   apt_install_woeusb
   apt_install_skype
   apt_install_terminator
+  apt_install_zsh
+  apt_install_powerline_fonts_theme
+  apt_install_syntax_gighlighting_on_zsh
   apt_install_rbenv
   apt_install_ruby_build
   apt_install_ruby
   apt_install_bundler
   apt_install_nodejs
   apt_install_rails
-  apt_install_zsh
-  apt_install_powerline_fonts_theme
 }
 
 # Let's go!
