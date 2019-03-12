@@ -180,6 +180,54 @@ apt_install_dev_dependencies() {
   sudo apt-get install -y  git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
 }
 
+apt_install_woeusb() {
+  if ! [ -x "$(command -v woeusb)" ]; then
+    echo "Installing WhoeUSB..."
+    sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+    sudo apt update
+    sudo apt install woeusb -y
+  fi
+}
+
+apt_install_skype() {
+  if ! [ -x "$(command -v skypeforlinux)" ]; then
+    echo "Installing Skype..."
+    sudo apt install apt-transport-https -y
+    wget -q -O - https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
+    echo "deb https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skypeforlinux.list
+    sudo apt-get update
+    sudo apt-get install skypeforlinux
+  fi
+}
+
+apt_install_terminator() {
+  if ! [ -x "$(command -v terminator)" ]; then
+    echo "Installing Terminator..."
+    sudo add-apt-repository ppa:gnome-terminator -y
+    sudo apt-get update
+    sudo apt-get install terminator -y
+  fi
+}
+
+apt_install_zsh() {
+  if ! [ -x "$(command -v zsh)" ]; then
+     sudo apt-get update
+     sudo apt-get install zsh -y
+     zsh --version
+     whereis zsh
+     sudo usermod -s /usr/bin/zsh $(whoami)
+     sudo reboot
+  fi
+}
+
+apt_install_powerline_fonts_theme() {
+  if [ ! -s /usr/share/powerlevel9k ]; then
+    sudo apt-get install powerline fonts-powerline -y
+    sudo apt-get install zsh-theme-powerlevel9k -y
+    echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+  fi
+}
+
 apt_install_rbenv() {
   if ! [ -x "$(command -v rbenv)" ]; then
     echo "Installing Rbenv..."
@@ -234,12 +282,17 @@ apt_install_rails() {
 installAll() {
   apt_intall_git
   apt_update_upgrade
+  apt_install_woeusb
+  apt_install_skype
+  apt_install_terminator
   apt_install_rbenv
   apt_install_ruby_build
   apt_install_ruby
   apt_install_bundler
   apt_install_nodejs
   apt_install_rails
+  apt_install_zsh
+  apt_install_powerline_fonts_theme
 }
 
 # Let's go!
