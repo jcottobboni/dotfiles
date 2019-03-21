@@ -288,14 +288,16 @@ apt_install_rails() {
 }
 
 apt_install_postgressql() {
-    echo "Installing Postgres..."
-    sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
-    wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
-    sudo apt-get update
-    sudo apt-get install postgresql-common -y
-    sudo apt-get install postgresql-9.6 libpq-dev -y
-    sudo -u postgres bash -c "psql -c \"CREATE USER jcottobboni SUPERUSER INHERIT CREATEDB CREATEROLE;\""
-    sudo -u postgres bash -c "psql -c \"  ALTER USER jcottobboni PASSWORD 'abissal';\""
+    if ! [ -x "$(command -v psql)" ]; then
+      echo "Installing Postgres..."
+      sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
+      wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+      sudo apt-get update
+      sudo apt-get install postgresql-common -y
+      sudo apt-get install postgresql-9.6 libpq-dev -y
+      sudo -u postgres bash -c "psql -c \"CREATE USER jcottobboni SUPERUSER INHERIT CREATEDB CREATEROLE;\""
+      sudo -u postgres bash -c "psql -c \"  ALTER USER jcottobboni PASSWORD 'abissal';\""
+    fi
 }
 
 apt_install_docker() {
