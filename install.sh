@@ -273,7 +273,7 @@ apt_install_bundler() {
 }
 
 apt_install_nodejs() {
-  if ! [ -x "$(command -v rbenv)" ]; then
+  if ! [ -x "$(command -v nodejs)" ]; then
     echo "Installing NodeJs..."
     curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
     sudo apt-get install -y nodejs
@@ -285,6 +285,39 @@ apt_install_rails() {
   gem install rails -v 5.2.2
   rbenv rehash
   rails -v
+}
+
+apt_install_postgressql() {
+    echo "Installing Postgres..."
+    sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
+    wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+    sudo apt-get update
+    sudo apt-get install postgresql-common -y
+    sudo apt-get install postgresql-9.6 libpq-dev -y
+    sudo -u postgres bash -c "psql -c \"CREATE USER jcottobboni SUPERUSER INHERIT CREATEDB CREATEROLE;\""
+    sudo -u postgres bash -c "psql -c \"  ALTER USER jcottobboni PASSWORD 'abissal';\""
+}
+
+apt_install_docker() {
+  source config.sh
+  # Don't run this as root as you'll not add your user to the docker group
+  sudo apt update
+  sudo apt install apt-transport-https ca-certificates software-properties-common curl
+  # sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  # echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  sudo apt update
+  sudo apt install -y linux-image-extra-$(uname -r)
+  sudo apt purge lxc-docker docker-engine docker.io
+  sudo rm -rf /etc/default/docker
+  sudo apt install -y docker-ce
+  sudo service docker start
+  sudo usermod -aG docker ${USER}
+}
+
+apt_autoremove(){
+  sudo apt autoremove && sudo apt clean
 }
 
 installAll() {
@@ -302,6 +335,9 @@ installAll() {
   apt_install_bundler
   apt_install_nodejs
   apt_install_rails
+  apt_install_docker
+  apt_install_postgressql
+  apt_autoremove
 }
 
 # Let's go!
