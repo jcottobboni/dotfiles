@@ -7,7 +7,7 @@ _link_count=0
 
 # Constants
 ARROW='>'
-
+INSTALLDIR=$(pwd)
 # Paths
 dotfiles_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 backup_dir="$dotfiles_dir/backups/$(date +%s)"
@@ -169,6 +169,21 @@ apt_intall_git() {
   git pull origin master
 }
 
+create_projects_folder() {
+  if [ ! -s ${HOME}/projects ]; then
+    report_header "$ARROW Creating projects folder "
+    source "${INSTALLDIR}/config.sh"
+    echo "Creating folder ${PROJECTS}"
+    mkdir ${PROJECTS}
+  fi
+}
+
+generate_ssh_key() {
+  if [ ! -s ${HOME}/.ssh/id_rsa.pub ]; then
+    report_header "$ARROW Generating SSH Key "
+    ssh-keygen -o -t rsa -b 4096 -C "jcottobboni@gmail.com"
+  fi
+}
 
 apt_install_dev_dependencies() {
   echo "Installing dependencies..."
@@ -322,9 +337,18 @@ apt_autoremove(){
   sudo apt autoremove && sudo apt clean
 }
 
+apt_install_rubymine(){
+  if ! [ -x "$(command -v rubymine)" ]; then
+    report_header "$ARROW Installing Rubymine "
+    sudo snap install rubymine --classic
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
+  generate_ssh_key
+  create_projects_folder
   apt_install_woeusb
   apt_install_skype
   apt_install_terminator
@@ -339,6 +363,7 @@ installAll() {
   apt_install_rails
   apt_install_docker
   apt_install_postgressql
+  apt_install_rubymine
   apt_autoremove
 }
 
