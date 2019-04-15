@@ -195,6 +195,17 @@ apt_install_dev_dependencies() {
   sudo apt-get install -y  git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
 }
 
+apt_install_cmake() {
+  if ! [ -x "$(command -v cmake)" ]; then
+    echo "Installing Cmake..."
+    sudo apt-get install software-properties-common -y
+    sudo add-apt-repository ppa:george-edison55/cmake-3.x -y
+    sudo apt-get update -y
+    sudo apt-get install cmake -y
+    sudo apt-get upgrade -y
+  fi
+}
+
 apt_install_woeusb() {
   if ! [ -x "$(command -v woeusb)" ]; then
     echo "Installing WhoeUSB..."
@@ -344,9 +355,17 @@ apt_install_rubymine(){
   fi
 }
 
+apt_install_datagrip(){
+  if ! [ -x "$(command -v datagrip)" ]; then
+    report_header "$ARROW Installing Rubymine "
+    sudo snap install datagrip --classic
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
+  apt_install_cmake
   generate_ssh_key
   create_projects_folder
   apt_install_woeusb
@@ -364,6 +383,7 @@ installAll() {
   apt_install_docker
   apt_install_postgressql
   apt_install_rubymine
+  apt_install_datagrip
   apt_autoremove
 }
 
