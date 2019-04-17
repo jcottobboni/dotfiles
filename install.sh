@@ -362,6 +362,15 @@ apt_install_datagrip(){
   fi
 }
 
+apt_install_dbeaver() {
+  if ! [ -x "$(command -v dbeaver)" ]; then
+    echo "Installing Dbeaver..."
+    sudo add-apt-repository ppa:serge-rider/dbeaver-ce -y
+    sudo apt update
+    sudo apt-get install dbeaver-ce -y
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -385,6 +394,7 @@ installAll() {
   apt_install_rubymine
   apt_install_datagrip
   apt_autoremove
+  apt_install_dbeaver
 }
 
 # Let's go!
