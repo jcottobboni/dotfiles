@@ -192,7 +192,14 @@ apt_install_dev_dependencies() {
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
   sudo apt-get update
-  sudo apt-get install -y  git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+  sudo apt-get install arandr feh gnome-screenshot cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev \
+  libxcb-image0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm \
+  libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev i3lock scrot imagemagick xautolock compton \
+  git-core curl htop zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev i3 \
+  libxslt1-dev software-properties-common libffi-dev nodejs yarn -y
+  sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
+  libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
+  libxkbcommon-x11-dev autoconf xutils-dev libtool rofi -y
 }
 
 apt_install_cmake() {
@@ -371,6 +378,37 @@ apt_install_dbeaver() {
   fi
 }
 
+apt_install_polybar() {
+    echo "Installing Polybar..."
+    cd $HOME
+    git clone https://github.com/jaagr/polybar.git
+    cd polybar && ./build.sh
+}
+
+apt_install_i3_gaps() {
+    echo "Installing i3 Gaps..."
+    cd $HOME
+    mkdir -p tmp
+    cd tmp
+    git clone https://github.com/Airblader/xcb-util-xrm
+    cd xcb-util-xrm
+    git submodule update --init
+    ./autogen.sh --prefix=/usr
+    make
+    sudo make install
+
+    git clone https://www.github.com/Airblader/i3 i3-gaps
+    cd i3-gaps
+    git checkout gaps && git pull
+    autoreconf --force --install
+    rm -rf build
+    mkdir build
+    cd build
+    ../configure --prefix=/usr --sysconfdir=/etc
+    make
+    sudo make install
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -395,6 +433,8 @@ installAll() {
   apt_install_datagrip
   apt_autoremove
   apt_install_dbeaver
+  apt_install_polybar
+  apt_install_i3_gaps
 }
 
 # Let's go!
