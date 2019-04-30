@@ -1,9 +1,9 @@
 FILES_TO_INSTALL=(
 	.config/i3/config
 	.config/i3/lock.sh
-	.config/i3/wallpaper.jpg
 	.config/polybar/config
 	.config/polybar/launch.sh
+	.config/terminator/config
 	compton.conf
 	.config/rofi/onedark.rasi
 )

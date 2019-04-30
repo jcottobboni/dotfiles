@@ -1,4 +1,4 @@
-# Author: João Paulo Moreira Santana
+# Author: João Carlos Ottobboni
 
 # DEFINIÇÃO DE VARIÁVEIS
 set $ws1  "1"
@@ -23,7 +23,7 @@ set $col_dang_d "#652222"
 set $gray       "#94A3A5"
 
 # DEFINIÇÃO DA TELA MOD
-set $mod Mod1
+set $mod Mod4
 
 # DEFINIÇÃO DE FONTE
 font pango:monospace 9

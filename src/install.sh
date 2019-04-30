@@ -244,6 +244,7 @@ apt_install_terminator() {
 
 apt_install_zsh() {
   if ! [ -x "$(command -v zsh)" ]; then
+     echo "Installing zsh..."
      sudo apt-get update
      sudo apt-get install zsh -y
      zsh --version
@@ -254,15 +255,15 @@ apt_install_zsh() {
 
 apt_install_oh_my_zsh() {
   if [ ! -s /home/jcottobboni/.oh-my-zsh ]; then
+    echo "Installing oh my zsh..."
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   fi
 }
 
 apt_install_powerline_fonts_theme() {
-  if [ ! -s /usr/share/powerlevel9k ]; then
-    sudo apt-get install powerline fonts-powerline -y
-    sudo apt-get install zsh-theme-powerlevel9k -y
-    echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+  if [ ! -s ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k ]; then
+    echo "Installing i9 powerline theme..."
+    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
   fi
 }
 
@@ -379,13 +380,16 @@ apt_install_dbeaver() {
 }
 
 apt_install_polybar() {
+  if [ ! -s ${HOME}/polybar ]; then
     echo "Installing Polybar..."
     cd $HOME
     git clone https://github.com/jaagr/polybar.git
     cd polybar && ./build.sh
+  fi
 }
 
 apt_install_i3_gaps() {
+  if [ ! -s ${HOME}/.config/i3 ]; then
     echo "Installing i3 Gaps..."
     cd $HOME
     mkdir -p tmp
@@ -407,6 +411,16 @@ apt_install_i3_gaps() {
     ../configure --prefix=/usr --sysconfdir=/etc
     make
     sudo make install
+  fi
+}
+
+apt_install_nerd_fonts() {
+  if [ ! -s ${HOME}/polybar ]; then
+    echo "Installing Polybar..."
+    cd $HOME
+    git clone https://github.com/ryanoasis/nerd-fonts.git
+    cd nerd-fonts && ./install.sh
+  fi
 }
 
 installAll() {
@@ -435,6 +449,8 @@ installAll() {
   apt_install_dbeaver
   apt_install_polybar
   apt_install_i3_gaps
+  apt_install_nerd_fonts
+  apt_install_oracle_client
 }
 
 # Let's go!

@@ -1,0 +1,23 @@
+[global_config]
+  focus = system
+  inactive_color_offset = 0.77
+[keybindings]
+  copy = <Primary>c
+  paste = <Primary>v
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.53
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    icon_bell = False
+    scrollbar_position = hidden
+    show_titlebar = False
