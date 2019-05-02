@@ -10,7 +10,7 @@ apt_install_oracle_client() {
     reset=$(tput setaf 7)       # Normal
 
     instdir=/opt/oracle/instantclient_12_1
-
+    sudo apt-get install libaio1
     sudo mkdir -p /opt/oracle/
     echo -e "${green}[*]${reset} Extracting instant-basic-linux to /opt/oracle/"
     sudo unzip -qq $HOME/dotfiles/files/oracle/instantclient-basic-linux.*.zip -d /opt/oracle/ || echo -e ' '${red}'[!] Error extracting instantclient-basic-linux'${reset} 1>&2
@@ -42,6 +42,7 @@ apt_install_oracle_client() {
     echo -e "${green}[*]${reset} Setting ORACLE environment variables for current shell session"
 
     # ORACLE
+    sudo ln -s /opt/oracle/instantclient_12_1/sdk/include $ORACLE_HOME/include
     export PATH=$PATH:/opt/oracle/instantclient_12_1
     export SQLPATH=/opt/oracle/instantclient_12_1
     export TNS_ADMIN=/opt/oracle/instantclient_12_1
@@ -49,10 +50,15 @@ apt_install_oracle_client() {
     export ORACLE_HOME=/opt/oracle/instantclient_12_1
     # Set path to correct version of ruby for metasploit
     export PATH=/opt/metasploit/ruby/bin:$PATH
-
     # Call ~/.zshrc
     source ~/.zshrc
-
+    export LD_LIBRARY_PATH
+    sudo  touch /etc/profile.d/oracle.sh && sudo chmod o+r /etc/profile.d/oracle.sh
+    grep -q -e 'export ORACLE_HOME=/opt/oracle/instantclient_12_1' /etc/profile.d/oracle.sh  || echo -e 'export ORACLE_HOME=/opt/oracle/instantclient_12_1' >>  /etc/profile.d/oracle.sh
+    sudo touch /etc/ld.so.conf.d/oracle.conf && sudo chmod o+r /etc/ld.so.conf.d/oracle.conf
+    grep -q -e '/opt/oracle/instantclient_12_1' /etc/ld.so.conf.d/oracle.conf || echo -e '/opt/oracle/instantclient_12_1' >>  /etc/ld.so.conf.d/oracle.conf
+    sudo touch /etc/ld.so.conf.d/oracle-instantclient.conf && sudo chmod o+r /etc/ld.so.conf.d/oracle-instantclient.conf
+    grep -q -e '/opt/oracle/instantclient_12_1' /etc/ld.so.conf.d/oracle-instantclient.conf || echo -e '/opt/oracle/instantclient_12_1' >>  /etc/ld.so.conf.d/oracle-instantclient.conf
     # Download ruby gem for ORACLE
     echo -e "${green}[*]${reset} Downloading ruby-oci8-2.1.8.zip"
     gem install 'ruby-oci8'

@@ -5,5 +5,10 @@ FILES_TO_INSTALL=(
 	.config/polybar/launch.sh
 	.config/terminator/config
 	compton.conf
+	.zshrc
+	.Xresources
+	.aliases
+	.exports
 	.config/rofi/onedark.rasi
+	.config/nvim/init.vim
 )

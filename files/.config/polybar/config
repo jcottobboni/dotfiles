@@ -19,7 +19,7 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #00000000
-background-alt = #00000000 
+background-alt = #00000000
 ;foreground = ${xrdb:color7:#222}
 foreground = #94A3A5
 foreground-alt = #94A3A5
@@ -58,8 +58,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = mpd
-modules-right = xbacklight pulseaudio xkeyboard cpu memory wlan eth date
-;filesystem alsa battery temperature powermenu memory cpu xkeyboard powermenu
+modules-right = filesystem system-uptime-pretty xbacklight pulseaudio xkeyboard cpu memory wlan eth vpn-openvpn-status date
 
 tray-position = right
 tray-padding = 2
@@ -98,16 +97,6 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = #44475A
 label-indicator-underline = ${colors.primary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
@@ -408,6 +397,27 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/vpn-openvpn-status]
+type = custom/script
+exec = ~/dotfiles/scripts/vpn-openvpn-status.sh
+interval = 5
+
+[module/system-uptime-pretty]
+type = custom/script
+exec = ~/dotfiles/scripts/system-uptime-pretty.sh
+interval = 30
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
 
 [settings]
 screenchange-reload = true

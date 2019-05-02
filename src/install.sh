@@ -195,11 +195,18 @@ apt_install_dev_dependencies() {
   sudo apt-get install arandr feh gnome-screenshot cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev \
   libxcb-image0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm \
   libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev i3lock scrot imagemagick xautolock compton \
-  git-core curl htop zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev i3 \
+  git-core curl htop zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev i3 cargo \
   libxslt1-dev software-properties-common libffi-dev nodejs yarn -y
   sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
-  libxkbcommon-x11-dev autoconf xutils-dev libtool rofi -y
+  libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi -y
+}
+
+apt_install_bat() {
+  if ! [ -x "$(command -v bat)" ]; then
+    echo "Installing Bat a cat with wings..."
+    cargo install bat
+  fi
 }
 
 apt_install_cmake() {
@@ -423,6 +430,31 @@ apt_install_nerd_fonts() {
   fi
 }
 
+apt_install_mdbook() {
+  if ! [ -x "$(command -v mdbook)" ]; then
+    echo "Installing Mdbook..."
+    cargo install --git https://github.com/rust-lang-nursery/mdBook.git mdbook
+  fi
+}
+
+apt_install_neovim() {
+  if ! [ -x "$(command -v nvim)" ]; then
+    echo "Installing Neovim..."
+    sudo add-apt-repository ppa:neovim-ppa/stable -y
+    sudo apt-get update -y
+    sudo apt-get install neovim -y
+    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+    sudo update-alternatives --config vi
+    sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+    sudo update-alternatives --config vim
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+    sudo update-alternatives --config editor
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -445,12 +477,15 @@ installAll() {
   apt_install_postgressql
   apt_install_rubymine
   apt_install_datagrip
-  apt_autoremove
   apt_install_dbeaver
   apt_install_polybar
   apt_install_i3_gaps
   apt_install_nerd_fonts
   apt_install_oracle_client
+  apt_install_bat
+  apt_install_mdbook
+  apt_install_neovim
+  apt_autoremove
 }
 
 # Let's go!
