@@ -416,7 +416,7 @@ mount-0 = /
 mount-1 = /home
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
+label-unmounted =
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [settings]
