@@ -12,8 +12,8 @@ set $ws8  "8"
 set $ws9  "9"
 set $ws10 "10"
 
-set $primary   DP-1
-set $secondary HDMI-1
+set $primary   HDMI-1
+set $secondary DVI-D-1
 
 set $col_prim   "#44475A"
 set $col_prim_d "#24252F"
@@ -110,7 +110,7 @@ client.background       $col_seco
 for_window [class=".*"] border pixel 0 px
 gaps inner 15
 
-exec_always xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+exec_always xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --panning 0x0+0+0 --rotate normal --output DVI-D-1 --mode 1600x900 --rate 144 --panning 0x0+0+0 --primary --pos 1920x0 --output DP-1 --mode 1920x1080 --pos 3840x0 --panning 0x0+0+0  --rotate normal
 exec_always feh --bg-fill "$HOME/.config/i3/wallpaper.jpg"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always compton --config $HOME/compton.conf
