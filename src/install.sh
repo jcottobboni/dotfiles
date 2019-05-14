@@ -455,6 +455,27 @@ apt_install_neovim() {
   fi
 }
 
+apt_install_nvm() {
+  if ! [ -x "$(command -v nvm)" ]; then
+    echo "Installing NVM..."
+    sudo apt-get update
+    sudo apt-get install build-essential libssl-dev
+    curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
+    bash install_nvm.sh
+    source ~/.zshrc
+    rm install_nvm.sh
+
+  fi
+}
+
+apt_install_jq() {
+  if ! [ -x "$(command -v jq)" ]; then
+    echo "Installing jq..."
+    sudo apt-get update
+    sudo apt-get install -y jq
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -485,6 +506,8 @@ installAll() {
   apt_install_bat
   apt_install_mdbook
   apt_install_neovim
+  apt_install_nvm
+  apt_install_jq
   apt_autoremove
 }
 
