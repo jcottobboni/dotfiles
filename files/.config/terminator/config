@@ -4,6 +4,7 @@
 [keybindings]
   copy = <Primary>c
   paste = <Primary>v
+  switch_to_tab_1 = <Primary>Right
 [layouts]
   [[default]]
     [[[child1]]]
