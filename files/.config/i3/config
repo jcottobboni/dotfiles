@@ -15,12 +15,27 @@ set $ws10 "10"
 set $primary   HDMI-1
 set $secondary DVI-D-1
 
+workspace $ws1 output $primary
+workspace $ws2 output $primary
+workspace $ws3 output $secondary
+workspace $ws4 output $primary
+workspace $ws5 output $primary
+workspace $ws6 output $primary
+workspace $ws7 output $primary
+workspace $ws8 output $secondary
+workspace $ws9 output $primary
+workspace $ws10 output $primary
+
 set $col_prim   "#44475A"
 set $col_prim_d "#24252F"
 set $col_seco   "#5C607A"
 set $col_dang   "#FF5555"
 set $col_dang_d "#652222"
 set $gray       "#94A3A5"
+
+# RESIZE VARIABLES
+set $center move absolute position center
+set $video floating toggle; resize set 1152 648px; $center
 
 # DEFINIÇÃO DA TELA MOD
 set $mod Mod4
@@ -106,11 +121,43 @@ client.placeholder      $col_seco $col_seco $gray $col_prim_d $col_seco
 
 client.background       $col_seco
 
+##### APP RULES ###################################
+
+# YOUTUBE RULES
+for_window [instance="youtube.com"] floating enable; $video
+
+# TWITCH RULES
+for_window [instance="twitch.tv"] floating enable; $center; set resize 1270px 562px
+
+# DISCORD RULES
+assign [class="discord"] $ws8
+
+# SLACK RULES
+for_window [class="Slack"] move to workspace $ws8
+
+# TELEGRAM RULES
+for_window [class="Telegram"] move to workspace $ws8
+
+# SPOTIFY RULES
+for_window [class="Spotify"] move to workspace $ws9
+
+# ATOM RULES
+for_window [class="Atom"] move to workspace $ws7
+
+# TERMINATOR RULES
+for_window [class="Terminator"] move to workspace $ws1
+
+# SKYPE RULES
+for_window [class="Skype"] move to workspace $ws9
+
 # CONFIGURAÇÕES DE TELA
 for_window [class=".*"] border pixel 0 px
 gaps inner 15
+
+##### LAUNCH ######################################
 
 exec_always xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --panning 0x0+0+0 --rotate normal --output DVI-D-1 --mode 1600x900 --rate 144 --panning 0x0+0+0 --primary --pos 1920x0 --output DP-1 --mode 1920x1080 --pos 3840x0 --panning 0x0+0+0  --rotate normal
 exec_always feh --bg-fill "$HOME/.config/i3/wallpaper.jpg"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always compton --config $HOME/compton.conf
+exec --no-startup-id nm-applet
