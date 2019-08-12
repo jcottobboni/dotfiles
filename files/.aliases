@@ -1,3 +1,7 @@
+#personal
+
+alias start_working='/home/jcottobboni/dotfiles/scripts/start_working.sh'
+
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -67,7 +71,7 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date "+%a, %d %b %H:%M:%S" && time cat && date "+%a, %d %b %H:%M:%S"'
 alias tldr='tldr -t base16'
-alias weather='curl -s "https://wttr.in/Ponorogo?2" | sed -n "1,27p"'
+alias weather='curl -s "https://wttr.in/Goiania?2" | sed -n "1,27p"'
 
 # Developer shortcuts
 alias g='git'
