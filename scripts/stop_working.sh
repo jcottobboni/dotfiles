@@ -3,6 +3,8 @@
 # Constants
 ARROW='>'
 # Paths
+
+cd "${HOME}/dotfiles"
 source "${HOME}/dotfiles/util/imports.sh"
 
 greetings
