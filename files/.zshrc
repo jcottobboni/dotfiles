@@ -2,6 +2,7 @@ export ZSH="/home/jcottobboni/.oh-my-zsh"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:/$HOME/dotfiles/bin
 eval "$(rbenv init -)"
 PATH=$PATH:/opt/oracle/instantclient_12_1
 SQLPATH=/opt/oracle/instantclient_12_1

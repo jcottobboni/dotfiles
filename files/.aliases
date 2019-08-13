@@ -1,8 +1,3 @@
-#personal
-
-alias start_working='/home/jcottobboni/dotfiles/scripts/start_working.sh'
-alias stop_working='/home/jcottobboni/dotfiles/scripts/stop_working.sh'
-
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
