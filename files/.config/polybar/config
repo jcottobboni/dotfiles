@@ -400,12 +400,12 @@ menu-2-1-exec = menu-open-0
 
 [module/vpn-openvpn-status]
 type = custom/script
-exec = vpn-openvpn-status
+exec = ~/dotfiles/bin/vpn-openvpn-status
 interval = 5
 
 [module/system-uptime-pretty]
 type = custom/script
-exec = system-uptime-pretty
+exec = ~/dotfiles/bin/system-uptime-pretty
 interval = 30
 
 [module/filesystem]
