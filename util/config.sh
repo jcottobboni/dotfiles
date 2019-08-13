@@ -15,3 +15,4 @@ CHEF_COOKBOOKS='${HOME}/projects/chef/chef-cookbooks'
 DCOS_CLUSTERS='${HOME}/projects/clusters/dcos-clusters'
 BOOSTNOTE="${HOME}/Boostnote"
 PRIVATE_DOTFILES="${HOME}/dotfiles/private"
+SIEDOS_SCRIPTS="${HOME}/dotfiles/siedos/scripts"
