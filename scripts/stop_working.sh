@@ -12,6 +12,12 @@ git add --all
 git commit -a -m 'Add Updates'
 git push origin master
 
+report_header "$ARROW Sending Private Dotfiles to repo..."
+cd $PRIVATE_DOTFILES
+git add --all
+git commit -a -m 'Add Updates'
+git push origin master
+
 report_header "$ARROW Sending Boosnote Files to repo..."
 cd $BOOSTNOTE
 git add --all
