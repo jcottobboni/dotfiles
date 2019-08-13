@@ -13,3 +13,4 @@ CHEF_HANDLERS='${HOME}/projects/chef/handlers'
 CHEF_DATA_BAGS='${HOME}/projects/chef/chef-data-bags'
 CHEF_COOKBOOKS='${HOME}/projects/chef/chef-cookbooks'
 DCOS_CLUSTERS='${HOME}/projects/clusters/dcos-clusters'
+BOOSTNOTE="${HOME}/Boostnote"
