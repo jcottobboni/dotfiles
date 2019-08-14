@@ -134,7 +134,7 @@ for_window [instance="twitch.tv"] floating enable; $center; set resize 1270px 56
 assign [class="discord"] $ws8
 
 # SLACK RULES
-for_window [class="Slack"] move to workspace $ws8
+for_window [instance="slack"] move to workspace $ws8
 
 # TELEGRAM RULES
 for_window [class="Telegram"] move to workspace $ws8
@@ -153,6 +153,12 @@ for_window [class="Skype"] move to workspace $ws9
 
 # BOOSTNOTE RULES
 for_window [class="Boostnote"] move to workspace $ws0
+
+# DATAGRIP RULES
+for_window [class="jetbrains-datagrip"] move to workspace $ws5
+
+# RUBYMINE RULES
+for_window [class="jetbrains-rubymine"] move to workspace $ws2
 
 # CONFIGURAÇÕES DE TELA
 for_window [class=".*"] border pixel 0 px
