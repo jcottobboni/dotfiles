@@ -1,0 +1,13 @@
+#!/bin/bash
+screens=$(DISPLAY=:0 xrandr -q | grep ' connected' | wc -l)
+
+if [ $screens == 3 ]; then
+  unlink ~/.config/i3/config
+  ln -s ~/dotfiles/files/.config/i3/config_3_screens ~/.config/i3/config
+elif [ $screens == 2 ]; then
+  unlink ~/.config/i3/config
+  ln -s ~/dotfiles/files/.config/i3/config_2_screens  ~/.config/i3/config
+else
+  unlink ~/.config/i3/config
+  ln -s ~/dotfiles/files/.config/i3/config ~/.config/i3/config
+fi

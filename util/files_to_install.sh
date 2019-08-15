@@ -6,6 +6,7 @@ FILES_TO_INSTALL=(
 	.config/terminator/config
 	compton.conf
 	.zshrc
+	.xsessionrc
 	.Xresources
 	.aliases
 	.exports

@@ -1,0 +1,173 @@
+# Author: João Carlos Ottobboni
+
+# DEFINIÇÃO DE VARIÁVEIS
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+set $primary   HDMI-1
+set $secondary DVI-D-1
+
+
+set $col_prim   "#44475A"
+set $col_prim_d "#24252F"
+set $col_seco   "#5C607A"
+set $col_dang   "#FF5555"
+set $col_dang_d "#652222"
+set $gray       "#94A3A5"
+
+# RESIZE VARIABLES
+set $center move absolute position center
+set $video floating toggle; resize set 1152 648px; $center
+
+# DEFINIÇÃO DA TELA MOD
+set $mod Mod4
+
+# DEFINIÇÃO DE FONTE
+font pango:monospace 9
+
+# ATALHOS DE SISTEMA
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Control+Print exec gnome-screenshot -i
+
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark -columns 1
+bindsym $mod+x exec --no-startup-id $HOME/.config/i3/lock.sh
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+d exec rofi -show window -theme onedark -columns 1
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r exec "/bin/bash ~/dotfiles/execute.sh activate"
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# GERENCIAMENTO DE JANELAS
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+workspace $ws1 output $primary
+workspace $ws2 output $primary
+workspace $ws3 output $secondary
+workspace $ws4 output $primary
+workspace $ws5 output $primary
+workspace $ws6 output $primary
+workspace $ws7 output $primary
+workspace $ws8 output $secondary
+workspace $ws9 output $primary
+workspace $ws10 output $primary
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+client.focused          $col_prim $col_prim $gray $col_prim_d $col_prim
+client.focused_inactive $col_seco $col_seco $gray $col_prim_d $col_seco
+client.unfocused        $col_seco $col_seco $gray $col_prim_d $col_seco
+client.urgent           $col_dang $col_dang $gray $col_dang_d $col_dang
+client.placeholder      $col_seco $col_seco $gray $col_prim_d $col_seco
+
+client.background       $col_seco
+
+##### APP RULES ###################################
+
+# YOUTUBE RULES
+for_window [instance="youtube.com"] floating enable; $video
+
+# TWITCH RULES
+for_window [instance="twitch.tv"] floating enable; $center; set resize 1270px 562px
+
+# DISCORD RULES
+assign [class="discord"] $ws8
+
+# SLACK RULES
+for_window [instance="slack"] move to workspace $ws8
+
+# TELEGRAM RULES
+for_window [class="Telegram"] move to workspace $ws8
+
+# SPOTIFY RULES
+for_window [class="Spotify"] move to workspace $ws9
+
+# ATOM RULES
+for_window [class="Atom"] move to workspace $ws7
+
+# TERMINATOR RULES
+for_window [class="Terminator"] move to workspace $ws1
+
+# SKYPE RULES
+for_window [class="Skype"] move to workspace $ws9
+
+# BOOSTNOTE RULES
+for_window [class="Boostnote"] move to workspace $ws0
+
+# DATAGRIP RULES
+for_window [class="jetbrains-datagrip"] move to workspace $ws5
+
+# RUBYMINE RULES
+for_window [class="jetbrains-rubymine"] move to workspace $ws2
+
+# CONFIGURAÇÕES DE TELA
+for_window [class=".*"] border pixel 0 px
+gaps inner 15
+
+##### LAUNCH ######################################
+
+exec_always xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --panning 0x0+0+0 --rotate normal --output DVI-D-1 --mode 1600x900 --rate 144 --panning 0x0+0+0 --primary --pos 1920x0 --output DP-1 --mode 1920x1080 --pos 3840x0 --panning 0x0+0+0  --rotate normal
+exec_always feh --bg-fill "$HOME/.config/i3/wallpaper.jpg"
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always compton --config $HOME/compton.conf
+exec --no-startup-id nm-applet
