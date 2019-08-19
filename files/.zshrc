@@ -17,7 +17,7 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 # Aliases.
 source ~/.aliases
-test -f ~/dotfiles/private/files/.aliases && source ~/dotfiles/private/files/.aliases
+test -f ~/dotfiles/private/dotfiles/files/.aliases && source ~/dotfiles/private/dotfiles/files/.aliases
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir vcs)
