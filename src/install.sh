@@ -287,7 +287,6 @@ apt_install_rbenv() {
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
     echo 'eval "$(rbenv init -)"' >>  ~/.zshrc
-    exec $SHELL
   fi
 }
 
@@ -296,7 +295,6 @@ apt_install_ruby_build() {
     echo "Installing Ruby build..."
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
     echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >>  ~/.zshrc
-    exec $SHELL
   fi
 }
 

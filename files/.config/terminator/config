@@ -19,7 +19,7 @@
     background_darkness = 0.53
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = Hack Nerd Font 11
+    font = Hack 13
     icon_bell = False
     scrollbar_position = hidden
     show_titlebar = False
