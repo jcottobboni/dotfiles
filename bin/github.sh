@@ -3,8 +3,6 @@
 # github.sh
 # - create a new repository in Github
 #
-# Copyright (C) 2015 Kenju - All Rights Reserved
-# https://github.com/KENJU/git_shellscript
 
 # get user name
 username=`git config github.user`
