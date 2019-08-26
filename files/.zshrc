@@ -18,7 +18,7 @@ source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 # Aliases.
 source ~/.aliases
 test -f ~/dotfiles/private/dotfiles/files/.aliases && source ~/dotfiles/private/dotfiles/files/.aliases
-
+test -f ~/dotfiles/private/dotfiles/files/.pgpass && ln -s ~/dotfiles/private/dotfiles/files/.pgpass ~/.pgpass
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)

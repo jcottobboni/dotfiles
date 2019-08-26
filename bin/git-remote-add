@@ -1,0 +1,8 @@
+#!/bin/bash
+
+read -r -p 'Remote branch name: ' remote_branch_name
+read -r -p 'Server user: ' server_user
+read -r -p 'Server Address: ' server_address
+read -r -p 'Server Path: ' server_path
+
+git remote add "$branch" "$branch"@"$branch":"$branch"
