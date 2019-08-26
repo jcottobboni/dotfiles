@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -r -p 'Server User: ' user
+read -r -p 'Server Adress: ' address
+ssh-copy-id -i ~/.ssh/id_rsa.pub "$user"@"$address"
