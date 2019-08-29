@@ -6,6 +6,17 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 alias ~='cd ~'
 alias -- -='cd -'
+alias projects="${HOME}/projects && ls -lA"
+alias tjto="${HOME}/projects/tjto && ls -lA"
+alias tcepi="${HOME}/projects/tcepi && ls -lA"
+alias tcdf="${HOME}/projects/tcdf && ls -lA"
+alias siedos="${HOME}/projects/siedos && ls -lA"
+alias tcego="${HOME}/projects/tcego && ls -lA"
+alias tcmgo="${HOME}/projects/tcmgo && ls -lA"
+alias engines="${HOME}/projects/engines && ls -lA"
+alias eng_adm="${HOME}/projects/eng_adm  && ls -lA"
+alias personal="${HOME}/projects/personal && ls -lA"
+
 
 # Easy report
 alias ls='ls -Fh --color=auto --group-directories-first'
@@ -49,8 +60,8 @@ alias preview='fzf --height=50% --layout=reverse --preview="bat --color=always {
 
 # Bookmarks
 alias dl='cd ~/Downloads && ls -lA'
-alias doc='cd ~/Documents && ls -lA'
-alias tmp='cd ~/Temporary && ls -lA'
+alias doc='cd ~/Documentos && ls -lA'
+alias tmp='cd ~/tmp && ls -lA'
 
 # Shortcuts
 alias c='clear'
@@ -81,3 +92,6 @@ alias :q='exit'
 alias help='man'
 alias nano='nvim'
 alias quit='exit'
+
+#System
+alias sourcezsh='source ~/.zshrc'
