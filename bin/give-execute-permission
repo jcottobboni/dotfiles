@@ -1,4 +1,2 @@
 #!/bin/bash
-
-read -r -p 'Filename: ' file
-chmod u+x "$file" 
+chmod u+x "$1" 
