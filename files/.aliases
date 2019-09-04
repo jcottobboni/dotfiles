@@ -71,10 +71,15 @@ alias tldr='tldr -t base16'
 alias weather='curl -s "https://wttr.in/Goiania?2" | sed -n "1,27p"'
 
 # Developer shortcuts
-alias g='git'
-alias git-pull-dir='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
 alias s='subl'
 alias v='nvim'
+
+# Git shortcuts
+alias conflicting-files="grep -lr '<<<<<<<' ."
+alias accept-theirs="grep -lr '<<<<<<<' . | xargs git checkout --theirs"
+alias accept-ours="grep -lr '<<<<<<<' . | xargs git checkout --ours"
+alias g='git'
+alias git-pull-dir='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;'
 
 
 # Typos
