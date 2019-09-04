@@ -26,4 +26,5 @@ git pull origin master
 
 report_header "$ARROW Summoning the big horse..."
 cd $SIEDOS_SCRIPTS
+git pull origin master
 ./clonar_projetos.sh
