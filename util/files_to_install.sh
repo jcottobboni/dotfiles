@@ -12,4 +12,7 @@ FILES_TO_INSTALL=(
 	.exports
 	.config/rofi/onedark.rasi
 	.config/nvim/init.vim
+	.gitconfig
+	.gitignore_global
+	.gitignore
 )

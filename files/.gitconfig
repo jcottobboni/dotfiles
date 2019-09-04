@@ -1,0 +1,10 @@
+# Documentation: https://www.kernel.org/pub/software/scm/git/docs/git-config.html
+
+[user]
+	email = jcottobboni@gmail.com
+	name = João Carlos Ottobboni
+[push]
+	default = current
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
