@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TITLE="Start a VPN Connection"
+FOLDER=$HOME"/dotfiles/private/dotfiles/siedos-vpn/"
+CHOICE=$(zenity --file-selection --title="Select your desired VPN config" --filename="$FOLDER" --file-filter="*.ovpn")
+VPNFILE=$(basename "$CHOICE")
+
+clear
+sudo openvpn --cd "$FOLDER" --config "$VPNFILE" --verb 1 
