@@ -474,6 +474,15 @@ apt_install_jq() {
   fi
 }
 
+apt_install_ansible() {
+  if ! [ -x "$(command -v ansible)" ]; then
+    echo "Installing Ansible..."
+    sudo apt-add-repository ppa:ansible/ansible -y
+    sudo apt-get update
+    sudo apt install ansible
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -506,6 +515,7 @@ installAll() {
   apt_install_neovim
   apt_install_nvm
   apt_install_jq
+  apt_install_ansible
   apt_autoremove
 }
 
