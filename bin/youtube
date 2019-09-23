@@ -1,0 +1,157 @@
+#!/bin/bash
+
+# put your videos folder here. it's usually $HOME/Videos but if you use a
+ # different one, you can change it
+basevideosfolder="$HOME/Videos"
+# the video preset we are going to use for capture. different presets will give captures of different quality
+videopreset="lossless_ultrafast"
+
+# the folder we're going to use
+videosfolder="$basevideosfolder/YouTube"
+if [ ! -d "$videosfolder" ]; then
+ mkdir $videosfolder
+fi
+
+# the base name of our capture files
+capturefile=$videosfolder/.capture
+
+# Start Log
+rm -f $capturefile.mkv $capturefile.wav $capturefile.log ffmpeg2pass*.log
+echo Start of Process > $capturefile.log
+
+# Variables
+TEXT="Resolution"
+OPTION1="$(xrandr --current|sed -n 's/.*current[ ]\([0-9]*\) x \([0-9]*\),.*/\1x\2/p')"
+DIMENSIONS="$(zenity --list --radiolist --text $TEXT --column "" --column "Choose" TRUE $OPTION1 FALSE "Other")"
+if [ "$DIMENSIONS" = "Other" ]; then
+ DIMENSIONS=$(zenity --entry --text $TEXT)
+elif [ "$DIMENSIONS" = "" ]; then
+ clear
+ echo Cancelled By User Input at: $TEXT >> $capturefile.log
+ sleep 1
+ exit
+fi
+echo $TEXT=$DIMENSIONS >> $capturefile.log
+TEXT="Audiosink"
+OPTION1="pulse"
+OPTION2="hw:0,0"
+AUDIOSINK="$(zenity --list --radiolist --text $TEXT --column "" --column "Choose" TRUE $OPTION1 FALSE $OPTION2 FALSE "Other")"
+if [ "$AUDIOSINK" = "Other" ]; then
+ AUDIOSINK=$(zenity --entry --text $TEXT)
+elif [ "$AUDIOSINK" = "" ]; then
+ clear
+ echo Cancelled By User Input at: $TEXT >> $capturefile.log
+ sleep 1
+ exit
+fi
+echo $TEXT=$AUDIOSINK >> $capturefile.log
+TEXT="Framerate"
+FRAMERATE=$(zenity --scale --text $TEXT --min-value=1 --max-value=30 --value=15 --step 2)
+if [ "$FRAMERATE" = "" ]; then
+ clear
+ echo Cancelled By User Input at: $TEXT >> $capturefile.log
+ sleep 1
+ exit
+else
+ echo $TEXT=$FRAMERATE >> $capturefile.log
+fi
+
+# Capture
+echo Capture >> $capturefile.log
+ffmpeg -f alsa -ac 2 -i $AUDIOSINK -f x11grab -r $FRAMERATE -s $DIMENSIONS -i $DISPLAY -vcodec libx264 -vpre $videopreset -crf 0 -threads 0 $capturefile.mkv -acodec pcm_s16le $capturefile.wav
+echo Status = $? >> $capturefile.log
+if ! zenity --question --text="keep?"; then
+ echo Cancelled, Removing Files
+ rm -f $capturefile.wav $capturefile.mkv $capturefile.log ffmpeg2pass*.log
+ exit
+fi
+# Filename
+tempfilename=$(zenity --entry --text "What should we call the file?" --entry-text "YouTube")
+# strip the .webm extension from it, if it exists
+if echo "$tempfilename" | grep .webm; then
+ eval tempfilename='$(echo "$tempfilename" | sed "s|.webm||")'
+fi
+# Offer to change the name of our video if our name is already used
+if [ -f "$videosfolder/"$tempfilename".webm" ]; then
+ echo duplicate file found, prompting user >> $capturefile.log
+ dupefilename="$tempfilename"
+ dupereference="$tempfilename"
+ while :
+ do
+   # see if we have a number at the end of our filename like so: filename.number
+   if echo "$dupefilename" | grep -E '\.[0-9]+$'; then
+     # if so, make it our new count
+     count=$(echo "$dupefilename" | sed 's|.*\.\([0-9]*\)$|\1|')
+     eval dupefilename=$(echo "$dupefilename" | sed 's|\(.*\)\.[0-9]*$|\1|')
+   else
+     # if not, create it
+     count=0
+   fi
+   # add 1 to our number
+   count=$(expr $count + 1)
+   # ask the user what to rename our video to
+   dupefilename=$(zenity --entry --text "Duplicate exists, what should we call our new one?\nnote: cancel deletes the old file." --entry-text '"$dupefilename".$count')
+   # strip the .webm extension from it, if it exists
+   if echo "$dupefilename" | grep .webm; then
+     eval dupefilename='$(echo "$dupefilename" | sed "s|.webm||")'
+   fi
+   #if our new filename is different than our old one, reset our count
+   if [ ! "$dupefilename" = "$dupereference" ]; then
+     count=0
+   fi
+   # exit the loop if we're not renaming the file
+   if [ "$dupefilename" = "" ]; then
+     break
+   # exit the loop if the file doesn't exist
+   elif [ ! -f "$videosfolder/"$dupefilename".webm" ]; then
+     break
+   fi
+   dupereference="$dupefilename"
+ done
+ if [ "$dupefilename" = "" ]; then
+   echo "deleting old file" >> $capturefile.log
+   rm -f $videosfolder/"$tempfilename".webm
+ else
+   # fix our file name
+   echo "our new file name" >> $capturefile.log
+   # change our filename
+   tempfilename="$dupefilename"
+ fi
+fi
+# add our videos folder to our filename, to make it cleaner
+filename=$videosfolder/."$tempfilename"
+shownfilename=$videosfolder/"$tempfilename"
+# Remove any old temporary files, to be sure
+echo removing existing temp files starting with ."$tempfilename" >> $capturefile.log
+rm -f "$filename".log "$filename".mkv "$filename".temp.mkv "$filename".wav
+# Rename to allow a simultaneous capture while we convert
+echo renaming current temp files >> $capturefile.log
+mv -v $capturefile.mkv "$filename".mkv >> $capturefile.log
+mv -v $capturefile.wav "$filename".wav >> $capturefile.log
+# we have to echo here as the output isn't redirected after it's moved so the
+ # move just overwrites the output
+mv $capturefile.log "$filename".log ; echo "Log file renamed:" >> "$filename".log; echo "'$capturefile.log' -> '"$filename".log'" >> "$filename".log
+# Combine
+echo Combine >> "$filename".log
+ffmpeg -i "$filename".mkv -i "$filename".wav -vcodec copy -acodec copy "$filename".temp.mkv
+echo Status = $? >> "$filename".log
+# Conversion
+echo Conversion Pass 1 >> "$filename".log
+ffmpeg -i "$filename".temp.mkv -an -vcodec libvpx -b 1000k -pass 1 "$shownfilename".webm
+echo Status = $? >> "$filename".log
+echo Conversion Pass 2 >> "$filename".log
+ffmpeg -i "$filename".temp.mkv -acodec libvorbis -ab 128k -ac 2 -vcodec libvpx -b 1000k -pass 2 -y "$shownfilename".webm
+echo Status = $? >> "$filename".log
+
+echo Finished
+echo End of Process >> "$filename".log
+# Finalization
+if zenity --question --text="clean up?"; then
+ echo Removing Temporary Files
+ rm -f "$filename".mkv "$filename".temp.mkv "$filename".wav "$filename".log ffmpeg2pass*.log
+else
+ echo Skipped Removal of Temp Files
+fi
+
+sleep 1
+exit
