@@ -274,7 +274,13 @@ apt_install_powerline_fonts_theme() {
   fi
 }
 
-apt_install_syntax_gighlighting_on_zsh() {
+apt_install_zsh_autosuggestions() {
+  if [ ! -s ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  fi
+}
+
+apt_install_zsh_syntax_highlighting() {
   if [ ! -s ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   fi
@@ -493,7 +499,8 @@ installAll() {
   apt_install_terminator
   apt_install_zsh
   apt_install_powerline_fonts_theme
-  apt_install_syntax_gighlighting_on_zsh
+  apt_install_zsh_syntax_highlighting
+  apt_install_zsh_autosuggestions
   apt_install_rbenv
   apt_install_ruby_build
   apt_install_ruby

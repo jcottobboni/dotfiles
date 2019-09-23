@@ -4,12 +4,17 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/$HOME/dotfiles/bin
 eval "$(rbenv init -)"
+export NVM_DIR="/home/jcottobboni/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nv
+
 PATH=$PATH:/opt/oracle/instantclient_12_1
 SQLPATH=/opt/oracle/instantclient_12_1
 TNS_ADMIN=/opt/oracle/instantclient_12_1
 LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1
 ORACLE_HOME=/opt/oracle/instantclient_12_1
 PATH=/opt/metasploit/ruby/bin:$PATH
+
+plugins=(git ruby zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -29,7 +34,3 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_CUSTOM_MEDIUM="echo -n '\uF859'"
 POWERLEVEL9K_CUSTOM_MEDIUM_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_MEDIUM_BACKGROUND="white"
-plugins=(git ruby zsh-syntax-highlighting)
-
-export NVM_DIR="/home/jcottobboni/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
