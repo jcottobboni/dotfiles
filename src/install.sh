@@ -275,9 +275,8 @@ apt_install_powerline_fonts_theme() {
 }
 
 apt_install_syntax_gighlighting_on_zsh() {
-  if [ ! -s /usr/share/zsh-syntax-highlighting ]; then
-    sudo apt-get install zsh-syntax-highlighting -y
-    echo "source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+  if [ ! -s ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   fi
 }
 

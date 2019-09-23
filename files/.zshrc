@@ -29,7 +29,7 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_CUSTOM_MEDIUM="echo -n '\uF859'"
 POWERLEVEL9K_CUSTOM_MEDIUM_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_MEDIUM_BACKGROUND="white"
-plugins=(git ruby capistrano bundler heroku rake command-not-found python pip github gnu-utils history-substring-search )
+plugins=(git ruby zsh-syntax-highlighting)
 
 export NVM_DIR="/home/jcottobboni/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
