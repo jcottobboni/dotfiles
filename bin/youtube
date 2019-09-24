@@ -2,7 +2,7 @@
 
 # put your videos folder here. it's usually $HOME/Videos but if you use a
  # different one, you can change it
-basevideosfolder="$HOME/Videos"
+basevideosfolder="$HOME/Vídeos"
 # the video preset we are going to use for capture. different presets will give captures of different quality
 videopreset="lossless_ultrafast"
 
