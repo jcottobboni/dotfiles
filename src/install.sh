@@ -491,7 +491,7 @@ apt_install_ansible() {
 apt_install_youtube_dl() {
   if ! [ -x "$(command -v youtube-dl)" ]; then
     echo "Installing Youtube DL..."
-    sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl -y
+    sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
     sudo chmod a+rx /usr/local/bin/youtube-dl
   fi
 }

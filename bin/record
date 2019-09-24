@@ -1,0 +1,3 @@
+#!/bin/bash
+
+asciinema rec ~/casts/$1
