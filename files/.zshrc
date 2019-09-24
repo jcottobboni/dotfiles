@@ -14,7 +14,7 @@ LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1
 ORACLE_HOME=/opt/oracle/instantclient_12_1
 PATH=/opt/metasploit/ruby/bin:$PATH
 
-plugins=(git ruby zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git ruby zsh-syntax-highlighting zsh-autosuggestions bgnotify)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -24,8 +24,8 @@ source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 source ~/.aliases
 test -f ~/dotfiles/private/dotfiles/files/.aliases && source ~/dotfiles/private/dotfiles/files/.aliases
 ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load user dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(rbenv status time)
 POWERLEVEL9K_CUSTOM_RUBY="echo -n '\ue21e' Ruby"
 POWERLEVEL9K_CUSTOM_RUBY_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_RUBY_BACKGROUND="red"
