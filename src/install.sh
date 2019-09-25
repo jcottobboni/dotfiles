@@ -181,7 +181,7 @@ create_projects_folder() {
 generate_ssh_key() {
   if [ ! -s ${HOME}/.ssh/id_rsa.pub ]; then
     report_header "$ARROW Generating SSH Key "
-    ssh-keygen -o -t rsa -b 4096 -C "jcottobboni@gmail.com"
+    ssh-keygen -o -t rsa -b 4096 -C "$EMAIL"
   fi
 }
 
@@ -261,7 +261,7 @@ apt_install_zsh() {
 }
 
 apt_install_oh_my_zsh() {
-  if [ ! -s /home/jcottobboni/.oh-my-zsh ]; then
+  if [ ! -s ${HOME}/.oh-my-zsh ]; then
     echo "Installing oh my zsh..."
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   fi
@@ -339,8 +339,8 @@ apt_install_postgressql() {
       sudo apt-get update
       sudo apt-get install postgresql-common -y
       sudo apt-get install postgresql-9.6 libpq-dev -y
-      sudo -u postgres bash -c "psql -c \"CREATE USER jcottobboni SUPERUSER INHERIT CREATEDB CREATEROLE;\""
-      sudo -u postgres bash -c "psql -c \"  ALTER USER jcottobboni PASSWORD 'abissal';\""
+      sudo -u postgres bash -c "psql -c \"CREATE USER $USER SUPERUSER INHERIT CREATEDB CREATEROLE;\""
+      sudo -u postgres bash -c "psql -c \"  ALTER USER $USER PASSWORD 'abissal';\""
     fi
 }
 
@@ -465,9 +465,7 @@ apt_install_nvm() {
     sudo apt-get install build-essential libssl-dev
     curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
     bash install_nvm.sh
-    source ~/.zshrc
     rm install_nvm.sh
-
   fi
 }
 
