@@ -37,7 +37,8 @@ apt_install_oracle_client() {
     grep -q -e 'ORACLE_HOME=/opt/oracle/instantclient_12_1' ~/.zshrc || echo -e "ORACLE_HOME=/opt/oracle/instantclient_12_1" >> ~/.zshrc
     grep -q -e '# Set path to correct version of ruby for metasploit' ~/.zshrc || echo -e "# Set path to correct version of ruby for metasploit" >> ~/.zshrc
     grep -q -e 'PATH=/opt/metasploit/ruby/bin:$PATH' ~/.zshrc || echo -e 'PATH=/opt/metasploit/ruby/bin:$PATH'>> ~/.zshrc
-
+    sudo ldconfig
+  
     # Set environment variables for current shell session
     echo -e "${green}[*]${reset} Setting ORACLE environment variables for current shell session"
 
