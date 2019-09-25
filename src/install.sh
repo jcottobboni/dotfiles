@@ -329,6 +329,7 @@ apt_install_rails() {
   gem install rails -v 5.2.2
   rbenv rehash
   rails -v
+  gem install lolcat
 }
 
 apt_install_postgressql() {
@@ -494,6 +495,14 @@ apt_install_youtube_dl() {
   fi
 }
 
+apt_install_asciinema() {
+  if ! [ -x "$(command -v asciinema)" ]; then
+    echo "Installing Asciinema..."
+    sudo apt-get install asciinema -y
+    sudo pip3 install fontTools -y
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -529,6 +538,7 @@ installAll() {
   apt_install_jq
   apt_install_ansible
   apt_install_youtube_dl
+  apt_install_asciinema
   apt_autoremove
 }
 
