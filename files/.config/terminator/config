@@ -19,7 +19,7 @@
 [plugins]
 [profiles]
   [[default]]
-    background_darkness = 0.53
+    background_darkness = 0.39
     background_type = transparent
     cursor_color = "#aaaaaa"
     font = Hack Nerd Font 13
