@@ -341,6 +341,7 @@ apt_install_postgressql() {
       sudo apt-get install postgresql-common -y
       sudo apt-get install postgresql-9.6 libpq-dev -y
       sudo -u postgres bash -c "psql -c \"CREATE USER $USER SUPERUSER INHERIT CREATEDB CREATEROLE;\""
+      # I use this password as an example for tutorials, replace it with a secure one
       sudo -u postgres bash -c "psql -c \"  ALTER USER $USER PASSWORD 'abissal';\""
     fi
 }

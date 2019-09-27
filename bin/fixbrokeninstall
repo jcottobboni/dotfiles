@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo apt-get --fix-broken install
+
+sudo apt-get clean
+
+sudo apt-get install -f
+
+sudo dpkg --configure -a
+
+sudo apt-get update
