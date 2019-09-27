@@ -1,10 +1,10 @@
-export ZSH="/home/jcottobboni/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$PATH:/$HOME/dotfiles/bin
 eval "$(rbenv init -)"
-export NVM_DIR="/home/jcottobboni/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nv
 
 PATH=$PATH:/opt/oracle/instantclient_12_1
