@@ -7,6 +7,14 @@ eval "$(rbenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nv
 
+
+#android
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
+
 PATH=$PATH:/opt/oracle/instantclient_12_1
 SQLPATH=/opt/oracle/instantclient_12_1
 TNS_ADMIN=/opt/oracle/instantclient_12_1

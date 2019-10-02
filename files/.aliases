@@ -73,6 +73,8 @@ alias weather='curl -s "https://wttr.in/Goiania?2" | sed -n "1,27p"'
 # Developer shortcuts
 alias s='subl'
 alias v='nvim'
+# Set alias to shorten command to run emulator
+alias emu="$ANDROID_HOME/tools/emulator"
 
 # Git shortcuts
 alias conflicting-files="grep -lr '<<<<<<<' ."
