@@ -15,13 +15,13 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/emulator
 
+# ORACLE
 PATH=$PATH:/opt/oracle/instantclient_12_1
 SQLPATH=/opt/oracle/instantclient_12_1
 TNS_ADMIN=/opt/oracle/instantclient_12_1
 LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1
 ORACLE_HOME=/opt/oracle/instantclient_12_1
 PATH=/opt/metasploit/ruby/bin:$PATH
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -30,15 +30,6 @@ source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 # Aliases.
 source ~/.aliases
 test -f ~/dotfiles/private/dotfiles/files/.aliases && source ~/dotfiles/private/dotfiles/files/.aliases
-
-
-
-
-prompt_codetalk() {
-    local content='\uF17C c{}deTalk'
-    $1_prompt_segment "$0" "$2" "black" "white" "$content" "#"
-}
-
 
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -77,7 +68,7 @@ POWERLEVEL9K_VCS_COMMIT_ICON="\uf417"
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%f"
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%f "
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(codetalk context custom_internet_signal  ssh root_indicator dir dir_writable vcs)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load user ssh root_indicator dir dir_writable vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon load context dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time rbenv status  time)
 
 
@@ -98,15 +89,11 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  extract
   colored-man-pages
   sudo
-  history
-  catimg
   npm
-  pip
+  yarn
   python
-  bindkey
   chucknorris
   ruby
   bgnotify
@@ -114,8 +101,6 @@ plugins=(
 
 alias ll='colorls -lA --sd --group-directories-first'
 alias ls='colorls --group-directories-first'
-
-bindkey '^`' autosuggest-clear
 
 LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=36:*.rpm=90'
 export LS_COLORS

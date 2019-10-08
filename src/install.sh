@@ -202,6 +202,7 @@ apt_install_dev_dependencies() {
   libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi -y
   sudo apt install ruby-colorize -y
   sudo gem install colorls
+  sudo apt-get instal cowsay fortunes fortunes-br
 }
 
 apt_install_bat() {
