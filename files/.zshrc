@@ -97,6 +97,8 @@ plugins=(
   chucknorris
   ruby
   bgnotify
+  extract
+  history
 )
 
 alias ll='colorls -lA --sd --group-directories-first'
