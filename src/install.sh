@@ -223,12 +223,12 @@ apt_install_cmake() {
   fi
 }
 
-apt_install_woeusb() {
-  if ! [ -x "$(command -v woeusb)" ]; then
-    echo "Installing WhoeUSB..."
-    sudo add-apt-repository ppa:nilarimogard/webupd8 -y
-    sudo apt update
-    sudo apt install woeusb -y
+apt_install_etcher() {
+  if ! [ -x "$(command -v balena-etcher)" ]; then
+    echo "Installing balena..."
+     echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list -y
+     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+     sudo apt update && sudo apt install balena-etcher-electron
   fi
 }
 
@@ -507,13 +507,20 @@ apt_install_asciinema() {
   fi
 }
 
+apt_install_scrcpy() {
+  if ! [ -x "$(command -v scrcpy)" ]; then
+    echo "Installing scrcpy..."
+    sudo snap install scrcpy
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
   apt_install_cmake
   generate_ssh_key
   create_projects_folder
-  apt_install_woeusb
+  apt_install_etcher
   apt_install_skype
   apt_install_terminator
   apt_install_zsh
@@ -543,6 +550,7 @@ installAll() {
   apt_install_ansible
   apt_install_youtube_dl
   apt_install_asciinema
+  apt_install_scrcpy
   apt_autoremove
 }
 
