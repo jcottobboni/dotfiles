@@ -29,7 +29,7 @@ apt_install_oracle_client() {
 
     echo -e "${green}[*]${reset} Configuring environment variables in ~/.bashrc"
 
-    grep -q -e '# ORACLE Stuff' ~/.zshrc || echo -e "# ORACLE Stuff" >> ~/.bashrc
+    grep -q -e 'export RAILS_MASTER_KEY=4de1721bd2adb1b32888bc440b0496b1' ~/.bashrc || echo -e "export RAILS_MASTER_KEY=4de1721bd2adb1b32888bc440b0496b1" >> ~/.bashrc
     grep -q -e 'PATH=$PATH:/opt/oracle/instantclient_12_1' ~/.zshrc || echo -e 'PATH=$PATH:/opt/oracle/instantclient_12_1' >> ~/.zshrc
     grep -q -e 'SQLPATH=/opt/oracle/instantclient_12_1' ~/.zshrc || echo -e "SQLPATH=/opt/oracle/instantclient_12_1" >> ~/.zshrc
     grep -q -e 'TNS_ADMIN=/opt/oracle/instantclient_12_1' ~/.zshrc || echo -e "TNS_ADMIN=/opt/oracle/instantclient_12_1" >> ~/.zshrc
@@ -38,7 +38,7 @@ apt_install_oracle_client() {
     grep -q -e '# Set path to correct version of ruby for metasploit' ~/.zshrc || echo -e "# Set path to correct version of ruby for metasploit" >> ~/.zshrc
     grep -q -e 'PATH=/opt/metasploit/ruby/bin:$PATH' ~/.zshrc || echo -e 'PATH=/opt/metasploit/ruby/bin:$PATH'>> ~/.zshrc
     sudo ldconfig
-  
+
     # Set environment variables for current shell session
     echo -e "${green}[*]${reset} Setting ORACLE environment variables for current shell session"
 

@@ -152,9 +152,6 @@ for_window [class="Terminator"] move to workspace $ws1
 # SKYPE RULES
 for_window [class="Skype"] move to workspace $ws9
 
-# BOOSTNOTE RULES
-for_window [class="Boostnote"] move to workspace $ws0
-
 # DATAGRIP RULES
 for_window [class="jetbrains-datagrip"] move to workspace $ws5
 
