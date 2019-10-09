@@ -507,6 +507,13 @@ apt_install_asciinema() {
   fi
 }
 
+apt_install_lepton() {
+  if ! [ -x "$(command -v lepton)" ]; then
+    echo "Installing lepton..."
+    sudo snap install lepton
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -543,6 +550,7 @@ installAll() {
   apt_install_ansible
   apt_install_youtube_dl
   apt_install_asciinema
+  apt_install_lepton
   apt_autoremove
 }
 
