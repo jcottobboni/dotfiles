@@ -202,7 +202,7 @@ apt_install_dev_dependencies() {
   libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi -y
   sudo apt install ruby-colorize -y
   sudo gem install colorls
-  sudo apt-get instal cowsay fortunes fortunes-br
+  sudo apt-get install cowsay fortunes fortunes-br
   sudo apt-get install qt5-qmake qt4-qmake -y
   sudo apt-get install graphicsmagick graphicsmagick-libmagick-dev-compat -y
   sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x -y
@@ -528,9 +528,16 @@ apt_install_lepton() {
 }
 
 apt_install_slack() {
-  if ! [ -x "$(command -v scrcpy)" ]; then
+  if ! [ -x "$(command -v slack)" ]; then
     echo "Installing slack..."
     sudo snap install slack --classic
+  fi
+}
+
+apt_install_android_studio() {
+  if ! [ -x "$(command -v android-studio)" ]; then
+    echo "Installing android studio..."
+    sudo snap install android-studio --classic
   fi
 }
 
@@ -573,6 +580,7 @@ installAll() {
   apt_install_scrcpy
   apt_install_lepton
   apt_install_slack
+  apt_install_android_studio
   apt_autoremove
 }
 
