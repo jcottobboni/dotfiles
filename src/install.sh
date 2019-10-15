@@ -203,6 +203,12 @@ apt_install_dev_dependencies() {
   sudo apt install ruby-colorize -y
   sudo gem install colorls
   sudo apt-get instal cowsay fortunes fortunes-br
+  sudo apt-get install qt5-qmake qt4-qmake -y
+  sudo apt-get install graphicsmagick graphicsmagick-libmagick-dev-compat -y
+  sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x -y
+  sudo apt-get install libqtwebkit-dev -y
+  sudo apt-get install memcached
+  sudo apt-get install freetds-dev
 }
 
 apt_install_bat() {
@@ -342,7 +348,7 @@ apt_install_postgressql() {
       wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
       sudo apt-get update
       sudo apt-get install postgresql-common -y
-      sudo apt-get install postgresql-9.6 libpq-dev -y
+      sudo apt-get install postgresql-10 libpq-dev -y
       sudo -u postgres bash -c "psql -c \"CREATE USER $USER SUPERUSER INHERIT CREATEDB CREATEROLE;\""
       # I use this password as an example for tutorials, replace it with a secure one
       sudo -u postgres bash -c "psql -c \"  ALTER USER $USER PASSWORD 'abissal';\""
