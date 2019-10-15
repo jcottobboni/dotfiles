@@ -527,6 +527,13 @@ apt_install_lepton() {
   fi
 }
 
+apt_install_slack() {
+  if ! [ -x "$(command -v scrcpy)" ]; then
+    echo "Installing slack..."
+    sudo snap install slack --classic
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -565,6 +572,7 @@ installAll() {
   apt_install_asciinema
   apt_install_scrcpy
   apt_install_lepton
+  apt_install_slack
   apt_autoremove
 }
 
