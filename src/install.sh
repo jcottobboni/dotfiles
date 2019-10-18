@@ -209,6 +209,7 @@ apt_install_dev_dependencies() {
   sudo apt-get install libqtwebkit-dev -y
   sudo apt-get install memcached
   sudo apt-get install freetds-dev
+  sudo apt-get install libmagickwand-dev
 }
 
 apt_install_bat() {
