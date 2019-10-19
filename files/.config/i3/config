@@ -167,6 +167,7 @@ gaps inner 15
 #exec_always xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --panning 0x0+0+0 --rotate normal --output DVI-D-1 --mode 1600x900 --rate 144 --panning 0x0+0+0 --primary --pos 1920x0 --output DP-1 --mode 1920x1080 --pos 3840x0 --panning 0x0+0+0  --rotate normal
 exec_always feh --bg-fill "$HOME/.config/i3/wallpaper.jpg"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id setxbmap -layout br
 exec_always killall compton
 exec_always compton -b -c
 exec --no-startup-id nm-applet
