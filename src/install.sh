@@ -579,13 +579,9 @@ installAll() {
   apt_install_youtube_dl
   apt_install_asciinema
   apt_install_scrcpy
-<<<<<<< HEAD
-  apt_install_postman
-=======
   apt_install_lepton
   apt_install_slack
   apt_install_android_studio
->>>>>>> 0ef54ef5c341becbdb57cc56278d029fa5243960
   apt_autoremove
 }
 
