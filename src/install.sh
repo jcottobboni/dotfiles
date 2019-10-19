@@ -437,7 +437,7 @@ apt_install_i3_gaps() {
 
 apt_install_nerd_fonts() {
   if [ ! -s ${HOME}/polybar ]; then
-    echo "Installing Polybar..."
+    echo "Installing Nerd Fonts, this take a while , go and grab an apple..."
     cd $HOME
     git clone https://github.com/ryanoasis/nerd-fonts.git
     cd nerd-fonts && ./install.sh
@@ -520,10 +520,10 @@ apt_install_scrcpy() {
   fi
 }
 
-apt_install_lepton() {
-  if ! [ -x "$(command -v scrcpy)" ]; then
-    echo "Installing lepton..."
-    sudo snap install lepton
+apt_install_postman() {
+  if ! [ -x "$(command -v postman)" ]; then
+    echo "Installing postman..."
+    sudo snap install postman
   fi
 }
 
@@ -564,7 +564,7 @@ installAll() {
   apt_install_youtube_dl
   apt_install_asciinema
   apt_install_scrcpy
-  apt_install_lepton
+  apt_install_postman
   apt_autoremove
 }
 

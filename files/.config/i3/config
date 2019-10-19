@@ -32,7 +32,7 @@ set $video floating toggle; resize set 1152 648px; $center
 set $mod Mod4
 
 # DEFINIÇÃO DE FONTE
-font pango:monospace 9
+font Hack Nerd Font 13
 
 # ATALHOS DE SISTEMA
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
