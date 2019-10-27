@@ -552,6 +552,7 @@ installAll() {
   apt_install_skype
   apt_install_terminator
   apt_install_zsh
+  apt_install_oh_my_zsh
   apt_install_powerline_fonts_theme
   apt_install_zsh_syntax_highlighting
   apt_install_zsh_autosuggestions
