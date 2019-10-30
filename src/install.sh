@@ -201,15 +201,16 @@ apt_install_dev_dependencies() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
   libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi -y
   sudo apt install ruby-colorize -y
-  sudo gem install colorls
-  sudo apt-get install cowsay fortunes fortunes-br
+  sudo gem install colorls 
+  sudo apt-get install cowsay fortunes fortunes-br -y
   sudo apt-get install qt5-qmake qt4-qmake -y
   sudo apt-get install graphicsmagick graphicsmagick-libmagick-dev-compat -y
   sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x -y
   sudo apt-get install libqtwebkit-dev -y
-  sudo apt-get install memcached
-  sudo apt-get install freetds-dev
-  sudo apt-get install libmagickwand-dev
+  sudo apt-get install memcached -y
+  sudo apt-get install freetds-dev -y
+  sudo apt-get install libmagickwand-dev -y
+  sudo apt install virtualbox-dkms -y
 }
 
 apt_install_bat() {
