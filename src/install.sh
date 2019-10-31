@@ -201,7 +201,7 @@ apt_install_dev_dependencies() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
   libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi -y
   sudo apt install ruby-colorize -y
-  sudo gem install colorls 
+  sudo gem install colorls
   sudo apt-get install cowsay fortunes fortunes-br -y
   sudo apt-get install qt5-qmake qt4-qmake -y
   sudo apt-get install graphicsmagick graphicsmagick-libmagick-dev-compat -y
@@ -234,9 +234,10 @@ apt_install_cmake() {
 apt_install_etcher() {
   if ! [ -x "$(command -v balena-etcher)" ]; then
     echo "Installing balena..."
-     echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list -y
-     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-     sudo apt update && sudo apt install balena-etcher-electron
+     echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list
+     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 -y
+     sudo apt update
+     sudo apt install balena-etcher-electron
   fi
 }
 
@@ -314,11 +315,20 @@ apt_install_ruby_build() {
   fi
 }
 
+apt_install_update_ruby_build(){
+   echo "Atualizando Ruby Build"
+   cd ~/.rbenv/plugins/ruby-build && git pull
+}
+
 apt_install_ruby() {
-  echo "Installing Rubu 2.6.1..."
-  rbenv install 2.6.1
-  rbenv global 2.6.1
-  ruby -v
+ if [[ ! `rbenv version | grep $RUBY_VERSION` ]]; then
+   echo "installing ruby 2.6.5>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+   rbenv install $RUBY_VERSION
+   rbenv global $RUBY_VERSION
+   ruby -v
+ else
+   echo "ruby $RUBY_VERSION already exists... skipping!" >&$log_fd 2>&1
+ fi
 }
 
 apt_install_bundler() {
@@ -337,7 +347,7 @@ apt_install_nodejs() {
 
 apt_install_rails() {
   echo "Installing Rails..."
-  gem install rails -v 5.2.2
+  gem install rails -v 5.2.3
   rbenv rehash
   rails -v
   gem install lolcat
@@ -559,6 +569,7 @@ installAll() {
   apt_install_zsh_autosuggestions
   apt_install_rbenv
   apt_install_ruby_build
+  apt_install_update_ruby_build
   apt_install_ruby
   apt_install_bundler
   apt_install_nodejs

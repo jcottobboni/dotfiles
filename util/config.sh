@@ -18,3 +18,4 @@ PRIVATE_DOTFILES="${HOME}/dotfiles/private/dotfiles"
 SIEDOS_SCRIPTS="${HOME}/dotfiles/private/scripts"
 SIEDOS_VPN="${HOME}/dotfiles/private/siedos-vpn"
 JOAOCARLOSDEV="${PROJECTS}/personal/joaocarlos.dev"
+RUBY_VERSION='2.6.5'
