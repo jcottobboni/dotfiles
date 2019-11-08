@@ -6,8 +6,8 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 alias ~='cd ~'
 alias -- -='cd -'
-
 alias dotfiles='~/dotfiles'
+
 # Easy report
 alias ls='ls -Fh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
@@ -92,3 +92,4 @@ alias quit='exit'
 
 #System
 alias sourcezsh='source ~/.zshrc'
+alias settings='XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
