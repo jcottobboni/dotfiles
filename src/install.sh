@@ -561,6 +561,12 @@ apt_install_nordic_theme() {
   fi
 }
 
+apt_install_web_storm() {
+  if ! [ -x "$(command -v webstorm)" ]; then
+    sudo snap install webstorm --classic
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -604,6 +610,7 @@ installAll() {
   apt_install_slack
   apt_install_android_studio
   apt_install_nordic_theme
+  apt_install_web_storm
   apt_autoremove
 }
 

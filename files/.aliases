@@ -92,4 +92,6 @@ alias quit='exit'
 
 #System
 alias sourcezsh='source ~/.zshrc'
- alias settings='XDG_CURRENT_DESKTOP=GNOME gnome-control-center' 
+alias settings='XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
+alias dotinstall='~/dotfiles/execute.sh install'
+alias dotactivate='~/dotfiles/execute.sh activate'
