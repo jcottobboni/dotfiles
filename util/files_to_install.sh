@@ -4,6 +4,7 @@ FILES_TO_INSTALL=(
 	.config/polybar/config
 	.config/polybar/launch.sh
 	.config/terminator/config
+	.config/gtk-3.0/settings.ini
 	compton.conf
 	.zshrc
 	.xsessionrc

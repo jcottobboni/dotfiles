@@ -553,6 +553,14 @@ apt_install_android_studio() {
   fi
 }
 
+apt_install_nordic_theme() {
+  if ! [ -x "$(command -v nordic-theme)" ]; then
+    sudo add-apt-repository ppa:noobslab/themes
+    sudo apt-get update
+    sudo apt-get install nordic-theme
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -595,6 +603,7 @@ installAll() {
   apt_install_lepton
   apt_install_slack
   apt_install_android_studio
+  apt_install_nordic_theme
   apt_autoremove
 }
 
