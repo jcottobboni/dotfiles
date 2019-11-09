@@ -19,7 +19,7 @@ backup_dir="$dotfiles_dir/backups/$(date +%s)"
 get_src_path() {
   echo "$dotfiles_dir/files/$1"
 }
-a
+
 get_dest_path() {
   echo "$HOME/.$1"
 }
