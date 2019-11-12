@@ -567,6 +567,12 @@ apt_install_web_storm() {
   fi
 }
 
+apt_install_vs_code() {
+  if ! [ -x "$(command -v code)" ]; then
+    sudo snap install code --classic
+  fi
+}
+
 installAll() {
   apt_intall_git
   apt_update_upgrade
@@ -606,11 +612,11 @@ installAll() {
   apt_install_youtube_dl
   apt_install_asciinema
   apt_install_scrcpy
-  apt_install_lepton
   apt_install_slack
   apt_install_android_studio
   apt_install_nordic_theme
   apt_install_web_storm
+  apt_install_vs_code
   apt_autoremove
 }
 
