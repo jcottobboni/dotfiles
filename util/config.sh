@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-USER='joao.carlos'
+USER='jcottobboni'
 NAME='Joao Carlos Ottobboni'
 EMAIL='jcottobboni@gmail.com'
 
