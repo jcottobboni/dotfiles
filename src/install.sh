@@ -211,6 +211,7 @@ apt_install_dev_dependencies() {
   sudo apt-get install freetds-dev -y
   sudo apt-get install libmagickwand-dev -y
   sudo apt install virtualbox-dkms -y
+  sudo apt-get install mailutils -y
 }
 
 apt_install_bat() {
