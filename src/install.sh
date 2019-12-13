@@ -360,6 +360,9 @@ apt_install_postgressql() {
       sudo sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
       wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
       sudo apt-get update
+      sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+      sudo apt-get update -y
+      sudo apt-get install libicu55 -y
       sudo apt-get install postgresql-common -y
       sudo apt-get install postgresql-10 libpq-dev -y
       sudo -u postgres bash -c "psql -c \"CREATE USER $USER SUPERUSER INHERIT CREATEDB CREATEROLE;\""
