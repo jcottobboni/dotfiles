@@ -8,15 +8,10 @@
 # Description: Start ikec
 ### END INIT INFO
 
-SESSIONNAME=ikecsession
-SITENAME=$PATH_FILE_IKE
-VPNUSER=$USUARIO_VPN_IKE
-VPNPASS=$SENHA_VPN_IKE
-
 case "$1" in
 start)
 echo "Open ikec Connection..."
-screen -S $SESSIONNAME -d -m ikec -r $SITENAME -u $VPNUSER -p $VPNPASS -a
+screen -S $SESSION_NAME_VPN_IKE -d -m ikec -r $PATH_FILE_IKE -u $USUARIO_VPN_IKE -p $SENHA_VPN_IKE -a
 ;;
 
 stop)
