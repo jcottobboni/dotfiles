@@ -20,4 +20,5 @@ sudo chmod +x $DOTFILES_FILES_PATH/.config/i3/lock.sh
 sudo chmod +x $DOTFILES_FILES_PATH/.config/polybar/launch.sh
 cp $DOTFILES_FILES_PATH/.config/i3/wallpaper.jpg ~/.config/i3
 test -f ~/dotfiles/private/dotfiles/files/.pgpass && ln -s ~/dotfiles/private/dotfiles/files/.pgpass ~/.pgpass
+ ln -s ~/dotfiles/private/dotfiles/files/.ike/sites ~/.ike/sites
 i3-msg restart

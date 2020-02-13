@@ -1,0 +1,33 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: ikec
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Start ikec
+### END INIT INFO
+SESSION_NAME_VPN_IKE=$SESSION_NAME_VPN_IKE
+PATH_FILE_IKE=$PATH_FILE_IKE
+USUARIO_VPN_IKE=$USUARIO_VPN_IKE
+SENHA_VPN_IKE=$SENHA_VPN_IKE
+
+case "$1" in
+start)
+echo "Open ikec Connection..."
+screen -S $SESSION_NAME_VPN_IKE -d -m ikec -r $PATH_FILE_IKE -u $USUARIO_VPN_IKE -p $SENHA_VPN_IKE -a
+ps aux | grep $SESSION_NAME_VPN_IKE
+;;
+
+stop)
+echo "Closing ikec Connection..."
+ killall -9 screen
+;;
+
+*)
+echo "error-->"
+echo "Syntax: $0 {start|stop}"
+exit 1
+;;
+
+esac
