@@ -30,6 +30,7 @@ source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 # Aliases.
 source ~/.aliases
 test -f ~/dotfiles/private/dotfiles/files/.aliases && source ~/dotfiles/private/dotfiles/files/.aliases
+test -f ~/dotfiles/private/dotfiles/files/.credentials && source ~/dotfiles/private/dotfiles/files/.credentials
 
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
