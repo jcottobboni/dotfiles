@@ -187,7 +187,7 @@ generate_ssh_key() {
 
 apt_install_dev_dependencies() {
   echo "Installing dependencies..."
-  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -361,10 +361,10 @@ apt_install_postgressql() {
       wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
       sudo apt-get update
       sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
-      sudo apt-get update -y
-      sudo apt-get install libicu55 -y
+      sudo apt-get update
+      sudo apt-get install libicu55
       sudo apt-get install postgresql-common -y
-      sudo apt-get install postgresql-10 libpq-dev -y
+      sudo apt-get install postgresql-11 libpq-dev -y
       sudo -u postgres bash -c "psql -c \"CREATE USER $USER SUPERUSER INHERIT CREATEDB CREATEROLE;\""
       # I use this password as an example for tutorials, replace it with a secure one
       sudo -u postgres bash -c "psql -c \"  ALTER USER $USER PASSWORD 'abissal';\""

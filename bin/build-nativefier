@@ -1,0 +1,29 @@
+#!/bin/bash
+apps_path="/home/jcottobboni/dotfiles/private/dotfiles/files/nativefier"
+read -r -p 'App name: ' app_name
+read -r -p 'Url for web app: ' url
+cd $apps_path
+rm $app_name.desktop
+rm -rf $app_name
+
+nativefier -n "$app_name" --single-instance $url
+mv "$app_name-linux-x64" "$app_name"
+cd "$app_name"
+touch $app_name.desktop
+
+echo "[Desktop Entry]" >> $app_name.desktop
+echo "Comment=$app_name app for Linux." >> $app_name.desktop
+echo "Exec=$apps_path/$app_name" >> $app_name.desktop
+echo "GenericName=$app_name for Linux." >> $app_name.desktop
+echo "Icon=/home/jcottobboni/dotfiles/private/dotfiles/files/nativefier/$app_name/resources/app/icon.png" >> $app_name.desktop
+echo "Name=$app_name" >> $app_name.desktop
+echo "Categories=Network" >> $app_name.desktop
+echo "Type=Application" >> $app_name.desktop
+echo "StartupWMClass=$app_name-nativefier-7bbd2c" >> $app_name.desktop
+echo "Terminal=false" >> $app_name.desktop
+echo "StartupNotify=true" >> $app_name.desktop
+sudo rm /home/jcottobboni/.local/share/applications/$app_name.desktop
+mv $app_name.desktop /home/jcottobboni/.local/share/applications
+#sudo desktop-file-install $app_name.desktop
+#sudo chmod 777 $app_name.desktop /usr/share/applications
+#sudo update-desktop-database
