@@ -201,7 +201,6 @@ apt_install_dev_dependencies() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev \
   libxkbcommon-x11-dev autoconf xutils-dev libtool rofi gdebi sshuttle -y
   sudo apt install ruby-colorize -y
-  sudo gem install colorls
   sudo apt-get install cowsay fortunes fortunes-br -y
   sudo apt-get install qt5-qmake qt4-qmake -y
   sudo apt-get install graphicsmagick graphicsmagick-libmagick-dev-compat -y
@@ -301,6 +300,7 @@ apt_install_zsh_syntax_highlighting() {
 
 apt_install_rbenv() {
   if ! [ -x "$(command -v rbenv)" ]; then
+    apt-get install -y libssl-dev libreadline-dev zlib1g-dev
     echo "Installing Rbenv..."
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
@@ -348,10 +348,11 @@ apt_install_nodejs() {
 
 apt_install_rails() {
   echo "Installing Rails..."
-  gem install rails -v 5.2.3
+  gem install rails -v 5.2.3 --no-ri --no-rdoc
   rbenv rehash
   rails -v
   gem install lolcat
+  gem install colorls
 }
 
 apt_install_postgressql() {

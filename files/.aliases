@@ -96,3 +96,6 @@ alias settings='XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
 alias dotinstall='~/dotfiles/execute.sh install'
 alias dotactivate='~/dotfiles/execute.sh activate'
 alias pentakill='morrediabo && shutdown -h now'
+
+#rails
+alias bi='bundle install --jobs 20'
