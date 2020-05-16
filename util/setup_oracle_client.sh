@@ -1,4 +1,3 @@
-apt_install_oracle_client() {
   if [ ! -s /opt/oracle/instantclient_12_1 ]; then
     echo "Installing oracle..."
     ##### (Cosmetic) Colour output
@@ -81,4 +80,3 @@ apt_install_oracle_client() {
     ${green}[*]Install finished${reset}"
 
 fi
-}
